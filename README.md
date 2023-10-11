@@ -1,5 +1,5 @@
 <div align="center">
-  
+
 # Repo File Sync Action
 
 [![Build CI](https://github.com/BetaHuhn/repo-file-sync-action/workflows/Test%20CI/badge.svg)](https://github.com/BetaHuhn/repo-file-sync-action/actions?query=workflow%3A%22Test+CI%22) [![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/BetaHuhn/repo-file-sync-action/blob/master/LICENSE) ![David](https://img.shields.io/david/betahuhn/repo-file-sync-action)
@@ -207,9 +207,9 @@ user/repo:
 
 ```yml
 user/repo:
+  - commitPrefix: 'fix: '
   - source: workflows/
     dest: .github/workflows/
-    commitPrefix: 'fix: '
 ```
 
 
@@ -283,7 +283,7 @@ group:
   repos: |
     user/repo
     user/repo1
-  files: 
+  files:
     - source: workflows/build.yml
       dest: .github/workflows/build.yml
     - source: LICENSE.md
@@ -305,7 +305,7 @@ group:
       user/repo2
 
   # second group
-  - files: 
+  - files:
       - source: configs/dependabot.yml
         dest: .github/dependabot.yml
     repos: |
@@ -499,7 +499,7 @@ This PR was created automatically by the repo-file-sync-action workflow run xxx.
 
 ### Fork and pull request workflow
 
-If you do not wish to grant this action write access to target repositories, you can specify a bot/user Github acccount that you do have access to with the `FORK` parameter. 
+If you do not wish to grant this action write access to target repositories, you can specify a bot/user Github acccount that you do have access to with the `FORK` parameter.
 
 A fork of each target repository will be created on this account, and all changes will be pushed to a branch on the fork, instead of upstream. Pull requests will be opened from the forks to target repositories.
 

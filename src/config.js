@@ -196,7 +196,6 @@ const parseFiles = (files) => {
 				template: item.template === undefined ? TEMPLATE_DEFAULT : item.template,
 				replace: item.replace === undefined ? REPLACE_DEFAULT : item.replace,
 				deleteOrphaned: item.deleteOrphaned === undefined ? DELETE_ORPHANED_DEFAULT : item.deleteOrphaned,
-				commitPrefix: parseCommitPrefix(item.commitPrefix),
 				exclude: parseExclude(item.exclude, item.source)
 			}
 		}
@@ -228,7 +227,7 @@ export async function parseConfig() {
 
 					if (result[repo.uniqueName] !== undefined) {
 						result[repo.uniqueName].files.push(...files)
-						result.commitPrefix = commitPrefix
+						result[repo.uniqueName].commitPrefix = commitPrefix
 						return
 					}
 
@@ -246,7 +245,7 @@ export async function parseConfig() {
 
 			if (result[repo.uniqueName] !== undefined) {
 				result[repo.uniqueName].files.push(...files)
-				result.commitPrefix = commitPrefix
+				result[repo.uniqueName].commitPrefix = commitPrefix
 				return
 			}
 
