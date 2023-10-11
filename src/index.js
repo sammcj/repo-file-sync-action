@@ -36,11 +36,9 @@ async function run() {
 		core.info(`Owner			: ${ item.repo.user }`)
 		core.info(`Https Url		: https://${ item.repo.fullName }`)
 		core.info(`Branch			: ${ item.repo.branch }`)
-		core.info(`Commit Prefix	: ${ item.COMMIT_PREFIX }`)
+		core.info(`Commit Prefix	: ${ item.commitPrefix }`)
 		core.info('	')
 		try {
-
-			const COMMIT_PREFIX = item.commitPrefix
 
 			// Clone and setup the git repository locally
 			await git.initRepo(item.repo)
@@ -95,11 +93,11 @@ async function run() {
 
 					const message = {
 						true: {
-							commit: useOriginalCommitMessage ? git.originalCommitMessage() : `${ COMMIT_PREFIX } synced local '${ file.dest }' with remote '${ file.source }'`,
+							commit: useOriginalCommitMessage ? git.originalCommitMessage() : `${ item.commitPrefix } synced local '${ file.dest }' with remote '${ file.source }'`,
 							pr: `synced local ${ directory } <code>${ file.dest }</code> with remote ${ directory } <code>${ file.source }</code>`
 						},
 						false: {
-							commit: useOriginalCommitMessage ? git.originalCommitMessage() : `${ COMMIT_PREFIX } created local '${ file.dest }' from remote '${ file.source }'`,
+							commit: useOriginalCommitMessage ? git.originalCommitMessage() : `${ item.commitPrefix } created local '${ file.dest }' from remote '${ file.source }'`,
 							pr: `created local ${ directory } <code>${ file.dest }</code> ${ otherFiles } from remote ${ directory } <code>${ file.source }</code>`
 						}
 					}
