@@ -247,7 +247,6 @@ export async function parseConfig() {
 
 			if (result[repo.uniqueName] !== undefined) {
 				result[repo.uniqueName].files.push(...files)
-				result[repo.uniqueName].commitPrefix.push(...commitPrefix)
 				return
 			}
 
