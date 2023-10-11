@@ -37,7 +37,7 @@ async function run() {
 		core.info(`Owner			: ${ item.repo.user }`)
 		core.info(`Https Url		: https://${ item.repo.fullName }`)
 		core.info(`Branch			: ${ item.repo.branch }`)
-		core.info(`Commit Prefix	: ${item.commitPrefix}`)
+		core.info(`Commit Prefix	: ${ commitPrefix }`)
 		core.info('	')
 		try {
 
@@ -94,11 +94,11 @@ async function run() {
 
 					const message = {
 						true: {
-							commit: useOriginalCommitMessage ? git.originalCommitMessage() : `${ commitPrefix } synced local '${ file.dest }' with remote '${ file.source }'`,
+							commit: useOriginalCommitMessage ? git.originalCommitMessage() : `${ item.commitPrefix } synced local '${ file.dest }' with remote '${ file.source }'`,
 							pr: `synced local ${ directory } <code>${ file.dest }</code> with remote ${ directory } <code>${ file.source }</code>`
 						},
 						false: {
-							commit: useOriginalCommitMessage ? git.originalCommitMessage() : `${ commitPrefix } created local '${ file.dest }' from remote '${ file.source }'`,
+							commit: useOriginalCommitMessage ? git.originalCommitMessage() : `${ item.commitPrefix } created local '${ file.dest }' from remote '${ file.source }'`,
 							pr: `created local ${ directory } <code>${ file.dest }</code> ${ otherFiles } from remote ${ directory } <code>${ file.source }</code>`
 						}
 					}
