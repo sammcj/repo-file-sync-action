@@ -9,7 +9,6 @@ const TEMPLATE_DEFAULT = false
 const DELETE_ORPHANED_DEFAULT = false
 
 let context
-let commitPrefix // Can come from getInput, or optionally be set per file in the config
 
 try {
 
@@ -241,7 +240,7 @@ export async function parseConfig() {
 		} else {
 			const files = parseFiles(configObject[key])
 			const repo = parseRepoName(key)
-			const commitPrefix = parseCommitPrefix(configObject[key].commitPrefix)
+			const commitPrefix = parseCommitPrefix(repo.commitPrefix)
 
 			if (result[repo.uniqueName] !== undefined) {
 				result[repo.uniqueName].files.push(...files)
