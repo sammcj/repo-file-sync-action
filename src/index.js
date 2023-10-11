@@ -37,6 +37,7 @@ async function run() {
 		core.info(`Owner		: ${ item.repo.user }`)
 		core.info(`Https Url	: https://${ item.repo.fullName }`)
 		core.info(`Branch		: ${ item.repo.branch }`)
+		core.info(`Commit Prefix	: ${ commitPrefix }`)
 		core.info('	')
 		try {
 
