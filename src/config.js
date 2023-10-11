@@ -197,6 +197,7 @@ const parseFiles = (files) => {
 				template: item.template === undefined ? TEMPLATE_DEFAULT : item.template,
 				replace: item.replace === undefined ? REPLACE_DEFAULT : item.replace,
 				deleteOrphaned: item.deleteOrphaned === undefined ? DELETE_ORPHANED_DEFAULT : item.deleteOrphaned,
+				commitPrefix,
 				exclude: parseExclude(item.exclude, item.source)
 			}
 		}
