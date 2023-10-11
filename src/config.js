@@ -224,15 +224,18 @@ export async function parseConfig() {
 				repos.forEach((name) => {
 					const files = parseFiles(group.files)
 					const repo = parseRepoName(name)
+					const commitPrefix = parseCommitPrefix(group.commitPrefix)
 
 					if (result[repo.uniqueName] !== undefined) {
 						result[repo.uniqueName].files.push(...files)
+						result[repo.uniqueName].commitPrefix.push(...commitPrefix)
 						return
 					}
 
 					result[repo.uniqueName] = {
 						repo,
-						files
+						files,
+						commitPrefix
 					}
 				})
 				result.commitPrefix = commitPrefix
@@ -245,7 +248,7 @@ export async function parseConfig() {
 
 			if (result[repo.uniqueName] !== undefined) {
 				result[repo.uniqueName].files.push(...files)
-				result[repo.uniqueName].commitPrefix = commitPrefix
+				result[repo.uniqueName].commitPrefix.push(...commitPrefix)
 				return
 			}
 
