@@ -185,10 +185,10 @@ const parseFiles = (files) => {
 			item = { source: item }
 
 		if (item.source !== undefined) {
-			if (item.commitPrefix !== undefined) {
-				commitPrefix = item.commitPrefix
-			} else {
+			if (item.commitPrefix === undefined) {
 				commitPrefix = context.COMMIT_PREFIX
+			} else {
+				commitPrefix = item.commitPrefix
 			}
 
 			return {
