@@ -8,7 +8,6 @@ import { parseConfig, default as config } from './config.js'
 
 const {
 	COMMIT_EACH_FILE,
-	COMMIT_PREFIX,
 	PR_LABELS,
 	ASSIGNEES,
 	DRY_RUN,
@@ -20,7 +19,8 @@ const {
 	COMMIT_AS_PR_TITLE,
 	FORK,
 	REVIEWERS,
-	TEAM_REVIEWERS
+	TEAM_REVIEWERS,
+	commitPrefix
 } = config
 
 async function run() {
@@ -93,11 +93,11 @@ async function run() {
 
 					const message = {
 						true: {
-							commit: useOriginalCommitMessage ? git.originalCommitMessage() : `${ COMMIT_PREFIX } synced local '${ file.dest }' with remote '${ file.source }'`,
+							commit: useOriginalCommitMessage ? git.originalCommitMessage() : `${ commitPrefix } synced local '${ file.dest }' with remote '${ file.source }'`,
 							pr: `synced local ${ directory } <code>${ file.dest }</code> with remote ${ directory } <code>${ file.source }</code>`
 						},
 						false: {
-							commit: useOriginalCommitMessage ? git.originalCommitMessage() : `${ COMMIT_PREFIX } created local '${ file.dest }' from remote '${ file.source }'`,
+							commit: useOriginalCommitMessage ? git.originalCommitMessage() : `${ commitPrefix } created local '${ file.dest }' from remote '${ file.source }'`,
 							pr: `created local ${ directory } <code>${ file.dest }</code> ${ otherFiles } from remote ${ directory } <code>${ file.source }</code>`
 						}
 					}

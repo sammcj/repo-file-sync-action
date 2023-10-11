@@ -17,13 +17,13 @@ const {
 	GIT_EMAIL,
 	TMP_DIR,
 	COMMIT_BODY,
-	COMMIT_PREFIX,
 	GITHUB_REPOSITORY,
 	OVERWRITE_EXISTING_PR,
 	SKIP_PR,
 	PR_BODY,
 	BRANCH_PREFIX,
-	FORK
+	FORK,
+	commitPrefix
 } = config
 
 import { dedent, execCmd } from './helpers.js'
@@ -232,7 +232,7 @@ export default class Git {
 	}
 
 	async commit(msg) {
-		let message = msg !== undefined ? msg : `${ COMMIT_PREFIX } synced file(s) with ${ GITHUB_REPOSITORY }`
+		let message = msg !== undefined ? msg : `${ commitPrefix } synced file(s) with ${ GITHUB_REPOSITORY }`
 		if (COMMIT_BODY) {
 			message += `\n\n${ COMMIT_BODY }`
 		}
@@ -442,7 +442,7 @@ export default class Git {
 			const { data } = await this.github.pulls.update({
 				owner: this.repo.user,
 				repo: this.repo.name,
-				title: `${ COMMIT_PREFIX } synced file(s) with ${ GITHUB_REPOSITORY }`,
+				title: `${ commitPrefix } synced file(s) with ${ GITHUB_REPOSITORY }`,
 				pull_number: this.existingPr.number,
 				body: body
 			})
@@ -455,7 +455,7 @@ export default class Git {
 		const { data } = await this.github.pulls.create({
 			owner: this.repo.user,
 			repo: this.repo.name,
-			title: title === undefined ? `${ COMMIT_PREFIX } synced file(s) with ${ GITHUB_REPOSITORY }` : title,
+			title: title === undefined ? `${ commitPrefix } synced file(s) with ${ GITHUB_REPOSITORY }` : title,
 			body: body,
 			head: `${ FORK ? FORK : this.repo.user }:${ this.prBranch }`,
 			base: this.baseBranch

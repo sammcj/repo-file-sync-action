@@ -203,6 +203,16 @@ user/repo:
     replace: false
 ```
 
+### Set a specific commit prefix
+
+```yml
+user/repo:
+  - source: workflows/
+    dest: .github/workflows/
+    commitPrefix: 'fix: '
+```
+
+
 ### Using templates
 
 You can render templates before syncing by using the [Jinja](https://jinja.palletsprojects.com/)-style template syntax. It will be compiled using [Nunjucks](https://mozilla.github.io/nunjucks/) and the output written to the specific file(s) or folder(s).

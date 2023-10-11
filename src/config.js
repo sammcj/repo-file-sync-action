@@ -9,6 +9,7 @@ const TEMPLATE_DEFAULT = false
 const DELETE_ORPHANED_DEFAULT = false
 
 let context
+let commitPrefix // Can come from getInput, or optionally be set per file in the config
 
 try {
 
@@ -184,6 +185,12 @@ const parseFiles = (files) => {
 			item = { source: item }
 
 		if (item.source !== undefined) {
+			if (item.commitPrefix !== undefined) {
+				commitPrefix = item.commitPrefix
+			} else {
+				commitPrefix = context.COMMIT_PREFIX
+			}
+
 			return {
 				source: item.source,
 				dest: item.dest || item.source,
