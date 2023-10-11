@@ -86,7 +86,7 @@ export async function copy(src, dest, isDirectory, file) {
 		if (exclude !== undefined) {
 
 			// Check if file-path is one of the present filepaths in the excluded paths
-			// This has presedence over the single file, and therefore returns before the single file check
+			// This has precedence over the single file, and therefore returns before the single file check
 			let filePath = ''
 			if (file.endsWith('/')) {
 				// File item is a folder

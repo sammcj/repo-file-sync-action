@@ -185,19 +185,13 @@ const parseFiles = (files) => {
 			item = { source: item }
 
 		if (item.source !== undefined) {
-			if (item.commitPrefix === undefined) {
-				commitPrefix = context.COMMIT_PREFIX
-			} else {
-				commitPrefix = item.commitPrefix
-			}
-
 			return {
 				source: item.source,
 				dest: item.dest || item.source,
 				template: item.template === undefined ? TEMPLATE_DEFAULT : item.template,
 				replace: item.replace === undefined ? REPLACE_DEFAULT : item.replace,
 				deleteOrphaned: item.deleteOrphaned === undefined ? DELETE_ORPHANED_DEFAULT : item.deleteOrphaned,
-				commitPrefix,
+				commitPrefix: item.commitPrefix === undefined ? context.COMMIT_PREFIX : item.commitPrefix,
 				exclude: parseExclude(item.exclude, item.source)
 			}
 		}
@@ -225,6 +219,7 @@ export async function parseConfig() {
 				repos.forEach((name) => {
 					const files = parseFiles(group.files)
 					const repo = parseRepoName(name)
+					const commitPrefix = group.commitPrefix || context.COMMIT_PREFIX
 
 					if (result[repo.uniqueName] !== undefined) {
 						result[repo.uniqueName].files.push(...files)
@@ -233,13 +228,15 @@ export async function parseConfig() {
 
 					result[repo.uniqueName] = {
 						repo,
-						files
+						files,
+						commitPrefix
 					}
 				})
 			})
 		} else {
 			const files = parseFiles(configObject[key])
 			const repo = parseRepoName(key)
+			const commitPrefix = parseFiles[key].commitPrefix
 
 			if (result[repo.uniqueName] !== undefined) {
 				result[repo.uniqueName].files.push(...files)
@@ -248,7 +245,8 @@ export async function parseConfig() {
 
 			result[repo.uniqueName] = {
 				repo,
-				files
+				files,
+				commitPrefix
 			}
 		}
 	})
